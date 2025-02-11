@@ -1,0 +1,255 @@
+# Copyright (C) 2023 Link Nacional
+# This file is distributed under the GNU General Public License v2 or later.
+msgid ""
+msgstr ""
+"Project-Id-Version: Cryptocurrency Payment for GiveWP 3.0.0\n"
+"Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/give-"
+"cryptocurrency\n"
+"POT-Creation-Date: 2023-03-13T11:44:59-03:00\n"
+"PO-Revision-Date: 2023-03-13 11:46-0300\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: pt\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+"X-Generator: Poedit 3.2.2\n"
+"X-Domain: lkngc-cryptocurrency-for-givewp\n"
+
+#. Plugin Name of the plugin
+msgid "Cryptocurrency Payment for GiveWP"
+msgstr "Pagamento por Criptomoedas para GiveWP"
+
+msgid "https://www.linknacional.com.br/wordpress/givewp/"
+msgstr ""
+
+#. Description of the plugin
+msgid "Payment via Cryptocurrencies."
+msgstr "Pagamento via criptomoedas."
+
+#. Author of the plugin
+msgid "Link Nacional"
+msgstr ""
+
+#. Author URI of the plugin
+msgid "https://www.linknacional.com.br"
+msgstr ""
+
+#: includes/admin/setting-admin.php:32
+msgid "Bitcoin Wallet"
+msgstr "Carteira Bitcoin"
+
+#: includes/admin/setting-admin.php:34
+msgid "The wallet where the Bitcoins received from the form will be stored"
+msgstr "Carteira onde serão armazenados os Bitcoins recebidos do formulário"
+
+#: includes/admin/setting-admin.php:39
+msgid "Ethereum Wallet"
+msgstr "Carteira Ethereum"
+
+#: includes/admin/setting-admin.php:41
+msgid "The wallet where the Ether received from the form will be stored"
+msgstr "Carteira onde serão armazenados os Ether recebidos do formulário"
+
+#: includes/admin/setting-admin.php:46
+msgid "Waves Wallet"
+msgstr "Carteira Waves"
+
+#: includes/admin/setting-admin.php:48
+msgid "The wallet where Waves received from the form will be stored"
+msgstr "Carteira onde serão armazenados os Waves recebidos do formulário"
+
+#: includes/admin/setting-admin.php:53
+msgid "Debug Mode"
+msgstr "Habilitar debug"
+
+#: includes/admin/setting-admin.php:55
+msgid "Enable environment for Debug."
+msgstr "Habilitar ambiente para Debug."
+
+#: includes/admin/setting-admin.php:59
+msgid "Enable"
+msgstr "Habilitar"
+
+#: includes/admin/setting-admin.php:60
+msgid "Disable"
+msgstr "Desabilitar"
+
+#: includes/admin/setting-admin.php:85
+msgid "Cryptocurrencies"
+msgstr "Criptomoedas"
+
+#: includes/bitcoin.php:30 includes/bitcoin.php:38 includes/bitcoin.php:46
+#: includes/ethereum.php:30 includes/ethereum.php:38 includes/ethereum.php:46
+#: includes/waves.php:33 includes/waves.php:41 includes/waves.php:49
+msgid "Error:"
+msgstr "Erro:"
+
+#: includes/bitcoin.php:31
+msgid "Bitcoin wallet not reported or invalid."
+msgstr "Carteira Bitcoin não reportada ou inválida."
+
+#: includes/bitcoin.php:39 includes/ethereum.php:39 includes/waves.php:42
+msgid "Donation disabled due to lack of SSL (HTTPS)."
+msgstr "Doação desativada devido à falta de SSL (HTTPS)."
+
+#: includes/bitcoin.php:47 includes/ethereum.php:47 includes/waves.php:50
+msgid "Missing or invalid module key."
+msgstr "Chave de módulo ausente ou inválida."
+
+#: includes/bitcoin.php:799 includes/bitcoin.php:853 includes/bitcoin.php:904
+#: includes/ethereum.php:789 includes/ethereum.php:844
+#: includes/ethereum.php:897 includes/waves.php:692
+msgid "Pending payment"
+msgstr "Pagamento pendente"
+
+#: includes/bitcoin.php:834 includes/bitcoin.php:885 includes/ethereum.php:825
+#: includes/ethereum.php:878
+msgid "Completed"
+msgstr "Completa"
+
+#: includes/ethereum.php:31
+msgid "Ethereum wallet not reported or invalid."
+msgstr "Carteira Ethereum não reportada ou inválida."
+
+#: includes/misc-functions.php:67
+msgid "Settings"
+msgstr "Configurações"
+
+#: includes/misc-functions.php:84
+msgid "Give Cryptocurrency Payment"
+msgstr "Give Pagamento em Criptomoeda"
+
+#: includes/waves.php:34
+msgid "Waves wallet not reported or invalid."
+msgstr "Carteira Waves não reportada ou inválida."
+
+msgid "Payment Information"
+msgstr "Informações do Pagamento"
+
+msgid "Secure Donation via SSL Encryption."
+msgstr "Doação Segura via Encriptação SSL."
+
+msgid "Donation amount"
+msgstr "Valor da doação"
+
+msgid "Click here to copy"
+msgstr "Clique aqui para copiar"
+
+msgid "Remaining time to make the payment"
+msgstr "Tempo restante para realizar o pagamento"
+
+msgid "Generate QR Code"
+msgstr "Gerar QR Code"
+
+msgid "Confirm payment"
+msgstr "Confirmar pagamento"
+
+msgid "Copy to clipboard: Ctrl+C and hit Enter"
+msgstr "Clique para copiar para área de transferência Ctrl + C e tecle Enter"
+
+msgid "Pay Waves"
+msgstr "Pagar Waves"
+
+msgid "Successfully recognized transaction"
+msgstr "Transação reconhecida com sucesso"
+
+msgid "Transaction not recognized, please try again later."
+msgstr "Transação não reconhecida, tente novamente mais tarde."
+
+msgid "There are no transactions in the registered wallet."
+msgstr "Não há transações na carteira cadastrada."
+
+msgid "Return message"
+msgstr "Mensagem de retorno"
+
+msgid "Return identifider"
+msgstr "Identificador de retorno"
+
+msgid "Cryptocurrency value"
+msgstr "Valor da criptomoeda"
+
+msgid "Consult Transaction"
+msgstr "Consultar Transação"
+
+msgid "Bitcoin Cryptocurrency"
+msgstr "Criptomoeda Bitcoin"
+
+msgid "Ethereum Cryptocurrency"
+msgstr "Criptomoeda Ethereum"
+
+msgid "Waves Cryptocurrency"
+msgstr "Criptomoeda Waves"
+
+msgid "Activation Error:"
+msgstr "Erro de ativação:"
+
+msgid "You must have"
+msgstr "Você deve ter o"
+
+msgid "version"
+msgstr "versão"
+
+msgid "for the Give Cryptocurrency add-on to activate"
+msgstr "para o plugin Give - Pagamento por Criptomoedas ativar"
+
+msgid "plugin installed and activated for the Give Cryptocurrency add-on to activate"
+msgstr "instalado e ativado para o plugin Give - Pagamento por Criptomoedas ativar"
+
+msgid "To complete the payment, log in to the official Waves platform"
+msgstr "Para concluir o pagamento, faça login na plataforma oficial da Waves"
+
+msgid "Send"
+msgstr "Envie"
+
+msgid "To"
+msgstr "Para"
+
+msgid "We were unable to confirm the payment."
+msgstr "Não conseguimos confirmar o pagamento."
+
+msgid "Click to copy the crypto amount."
+msgstr "Clique para copiar o valor da doação."
+
+msgid "Click to copy the wallet."
+msgstr "Clique para copiar a carteira."
+
+msgid "Donation Details"
+msgstr "Detalhes da Doação"
+
+msgid "Return Message:"
+msgstr "Mensagem de retorno:"
+
+msgid "Return identifier:"
+msgstr "Identificador de retorno:"
+
+msgid "Criptocurrency value:"
+msgstr "Valor da criptomoeda:"
+
+msgid "Wallet:"
+msgstr "Carteira:"
+
+msgid "Enable error margin"
+msgstr "Habilitar margem de erro"
+
+msgid "Enable error margin for transaction verification."
+msgstr "Habilita margem de erro para a verificação de transação."
+
+msgid "Error margin"
+msgstr "Margem de erro"
+
+msgid "Define the error margin for transaction verification (ex: 2, for 2%)."
+msgstr "Define a margem de erro para a verificação de transação (ex: 2, para 2%)."
+
+msgid "[Query result]: Unrecognized transaction on blockchain"
+msgstr "[Resultado da consulta]: Transação ou blockchain não reconhecida"
+
+msgid "[Query result]: Payment confirmed"
+msgstr "[Resultado da consulta]: Pagamento confirmado"
+
+msgid "[Query result]: Request error - Unable to verify"
+msgstr "[Resultado da consulta]: Erro na requisição - Impossível verificar"
+
+msgid "Unauthenticated session"
+msgstr "Sessão não autenticada"
