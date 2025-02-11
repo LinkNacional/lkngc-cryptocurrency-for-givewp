@@ -60,8 +60,8 @@ final class LkngcCryptocurrencyForGivewpEthereum extends PaymentGateway {
             <div class="donation-errors">
                 <div class="give-notice give-notice-error" id="give_error_warning">
                     <p class="give_notice give_warning">
-                    <strong>' . esc_html__('Notice:', 'give') . '</strong>
-                    ' . esc_html__('CryptoCurrency is not enabled for the classic and multistep form!', 'give') . '</p>
+                    <strong>' . esc_html__('Notice:', 'lkngc-cryptocurrency-for-givewp') . '</strong>
+                    ' . esc_html__('CryptoCurrency is not enabled for the classic and multistep form!', 'lkngc-cryptocurrency-for-givewp') . '</p>
                 </div>
             </div>';
             return $html;
