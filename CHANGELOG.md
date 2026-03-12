@@ -1,3 +1,6 @@
+# 4.0.3 - 12/03/2026
+* Adição de novos ícones e banners.
+
 # 4.0.2 - 11/02/2025
 * Adequação as normativas do WordPress;
 * Correção de erros de script;

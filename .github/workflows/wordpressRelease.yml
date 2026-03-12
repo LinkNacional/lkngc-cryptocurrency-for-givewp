@@ -1,0 +1,61 @@
+name: Deploy Plugin to WordPress.org
+
+on:
+  workflow_dispatch:
+
+env:
+  PLUGIN_NAME: lkngc-cryptocurrency-for-givewp
+  PHP_VERSION: "7.4"
+  DEPLOY_TAG: "4.0.3"
+
+jobs:
+  deploy-to-wp:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - name: Checkout branch main
+        uses: actions/checkout@v3
+        with:
+          ref: main
+
+      - name: Run composer install
+        uses: php-actions/composer@v6
+        with:
+          php_version: ${{ env.PHP_VERSION }}
+          working_dir: "."
+          args: --ignore-platform-reqs
+          command: install
+          dev: no
+
+      - name: Prepare plugin folder
+        run: |
+          mkdir -p dist
+          mkdir -p build
+          mv ./Admin ./Includes ./languages ./Public composer.json package.json *.php *.txt ./build
+          cp -r vendor ./build/vendor
+          find ./build -type f -exec chmod 0644 {} +
+          find ./build -type d -exec chmod 0755 {} +
+
+      - name: Archive Release
+        uses: thedoctor0/zip-release@master
+        with:
+          type: 'zip'
+          path: '.'
+          directory: 'build'
+          filename: '${{ env.PLUGIN_NAME }}.zip'
+          exclusions: '*.git* /*node_modules/* .editorconfig'
+
+      - name: Move .zip to custom location
+        run: |
+          mv ./build/${{ env.PLUGIN_NAME }}.zip ./dist/
+
+      - name: Deploy para WordPress.org
+        uses: 10up/action-wordpress-plugin-deploy@stable
+        env:
+          VERSION: ${{ env.DEPLOY_TAG }}
+          SLUG: lkngc-cryptocurrency-for-givewp
+          SVN_PASSWORD: ${{ secrets.SVN_PASSWORD }}
+          SVN_USERNAME: ${{ secrets.SVN_USERNAME }}
+          ASSETS_DIR: build/Includes/assets/WordpressAssets
+          BUILD_DIR: build

@@ -5,7 +5,7 @@ Tags: donation, givewp, crypto, bitcoin, ethereum
 Requires at least: 5.7
 Requires PHP: 7.4
 Tested up to: 6.7
-Stable tag: 4.0.2
+Stable tag: 4.0.3
 License: GPLv3 or later
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
@@ -59,9 +59,10 @@ It sends the donation currency and the cryptocurrency used in the donation. This
 
 == Screenshots ==
 
-1. None
-
 == Changelog ==
+= 4.0.3 - 12/03/2026 =
+* Addition of new icons and banners.
+
 = 4.0.2 - 11/02/2025 =
 * WordPress guidelines update
 * Fixed script errors;
