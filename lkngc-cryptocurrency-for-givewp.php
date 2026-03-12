@@ -16,7 +16,7 @@
  * Plugin Name:       Cryptocurrency Payment for GiveWP
  * Plugin URI:        https://www.linknacional.com.br/wordpress/givewp/criptomoedas/
  * Description:       Payment via Cryptocurrencies.
- * Version:           4.0.2
+ * Version:           4.0.3
  * Author:            Link Nacional
  * Author URI:        https://www.linknacional.com.br/
  * Requires Plugins: give
@@ -43,7 +43,7 @@ use Lkngc\CryptocurrencyForGivewp\Includes\LkngcCryptocurrencyForGivewpDeactivat
  * Start at version 1.0.0 and use SemVer - https://semver.org
  * Rename this for your plugin and update it as you release new versions.
  */
-define('LKNGC_GIVE_CRYPTOCURRENCY_FOR_GIVEWP_VERSION', '4.0.2');
+define('LKNGC_GIVE_CRYPTOCURRENCY_FOR_GIVEWP_VERSION', '4.0.3');
 
 define('LKNGC_GIVE_CRYPTOCURRENCY_FOR_GIVEWP_MIN_GIVE_VERSION', '2.3.0');
 
