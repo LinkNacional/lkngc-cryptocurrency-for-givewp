@@ -60,6 +60,9 @@ It sends the donation currency and the cryptocurrency used in the donation. This
 == Screenshots ==
 
 == Changelog ==
+= 4.0.3 - 12/03/2026 =
+* Addition of new icons and banners.
+
 = 4.0.2 - 11/02/2025 =
 * WordPress guidelines update
 * Fixed script errors;
