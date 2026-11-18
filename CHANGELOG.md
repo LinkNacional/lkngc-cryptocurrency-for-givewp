@@ -8,7 +8,8 @@
 * A desinstalação agora remove apenas as opções do plugin e não quebra se o GiveWP já foi removido;
 * Limpeza de padrão de código e remoção dos acessos obsoletos apontados pelo Plugin Check;
 * Versão mínima de PHP elevada para 8.1, alinhada no cabeçalho do plugin, no readme e nos workflows de release;
-* readme reescrito, com serviços externos, bibliotecas e configuração documentados.
+* readme reescrito, com serviços externos, bibliotecas e configuração documentados;
+* Removido o boilerplate npm/eslint que sobrou do template (o plugin não tem build de JavaScript e nunca usou esses pacotes), então o pacote não leva mais package.json e as dependências desatualizadas apontadas pelo Dependabot deixam de existir.
 
 # 4.0.3 - 12/03/2026
 * Adição de novos ícones e banners.

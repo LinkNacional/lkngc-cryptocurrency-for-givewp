@@ -139,6 +139,7 @@ A: Yes — tested up to [WordPress](https://www.linknacional.com.br/wordpress/) 
 * Tweak: code standard cleanup and removal of the deprecated accesses flagged by the Plugin Check.
 * Tweak: minimum required PHP raised to 8.1, aligned in the plugin header, the readme and the release workflows.
 * Tweak: readme rewritten, with the external services, libraries and configuration documented.
+* Tweak: removed the unused npm/eslint boilerplate from the repository (the plugin has no JavaScript build step and never used those packages), so the release package no longer ships a package.json and the outdated dependencies reported by Dependabot are gone.
 
 = 4.0.3 - 12/03/2026 =
 * Addition of new icons and banners.

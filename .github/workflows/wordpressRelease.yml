@@ -32,7 +32,7 @@ jobs:
         run: |
           mkdir -p dist
           mkdir -p build
-          mv ./Admin ./Includes ./languages ./Public composer.json package.json *.php *.txt ./build
+          mv ./Admin ./Includes ./languages ./Public composer.json *.php *.txt ./build
           cp -r vendor ./build/vendor
           find ./build -type f -exec chmod 0644 {} +
           find ./build -type d -exec chmod 0755 {} +
@@ -44,7 +44,7 @@ jobs:
           path: '.'
           directory: 'build'
           filename: '${{ env.PLUGIN_NAME }}.zip'
-          exclusions: '*.git* /*node_modules/* .editorconfig'
+          exclusions: '*.git* .editorconfig'
 
       - name: Move .zip to custom location
         run: |
