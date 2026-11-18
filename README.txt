@@ -6,7 +6,7 @@ Tags: givewp, donation, cryptocurrency, bitcoin, ethereum
 Requires at least: 5.7  
 Tested up to: 7.1  
 Stable tag: 4.0.4  
-Requires PHP: 7.4  
+Requires PHP: 8.1  
 License: GPL-3.0+  
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
@@ -99,6 +99,9 @@ A: This plugin is released under the GPLv3 license.
 Q: What do I need to use this plugin?  
 A: You need [GiveWP](https://www.linknacional.com.br/wordpress/givewp/) version 2.3.0 or later installed and active, and a Bitcoin and/or Ethereum wallet to receive the donations.
 
+Q: What PHP version do I need?  
+A: PHP 8.1 or later. The minimum is declared in the plugin header, so [WordPress](https://www.linknacional.com.br/wordpress/) blocks the activation on older versions instead of failing at runtime.
+
 Q: Which cryptocurrencies are supported?  
 A: Bitcoin (BTC) and Ethereum (ETH), each one as a separate gateway that can be enabled per form.
 
@@ -134,6 +137,7 @@ A: Yes — tested up to [WordPress](https://www.linknacional.com.br/wordpress/) 
 * Fix: the REST verification route killed the JSON response (exit) when the request was missing parameters, and crashed when the donation was not found or the blockchain API was unavailable.
 * Fix: uninstall now removes only the plugin options and no longer breaks if GiveWP was already deleted.
 * Tweak: code standard cleanup and removal of the deprecated accesses flagged by the Plugin Check.
+* Tweak: minimum required PHP raised to 8.1, aligned in the plugin header, the readme and the release workflows.
 * Tweak: readme rewritten, with the external services, libraries and configuration documented.
 
 = 4.0.3 - 12/03/2026 =

@@ -19,6 +19,7 @@
  * Version:           4.0.4
  * Author:            Link Nacional
  * Author URI:        https://www.linknacional.com.br/
+ * Requires PHP:      8.1
  * Requires Plugins: give
  * License:           GPL-3.0+
  * License URI:       https://www.gnu.org/licenses/gpl-3.0.txt

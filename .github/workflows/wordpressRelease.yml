@@ -5,7 +5,7 @@ on:
 
 env:
   PLUGIN_NAME: lkngc-cryptocurrency-for-givewp
-  PHP_VERSION: "7.4"
+  PHP_VERSION: "8.1"
   DEPLOY_TAG: "4.0.4"
 
 jobs:

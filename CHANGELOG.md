@@ -7,6 +7,7 @@
 * Corrigida a rota REST de verificação, que matava a resposta JSON (exit) em requisições sem parâmetros e quebrava com doação inexistente ou API fora do ar;
 * A desinstalação agora remove apenas as opções do plugin e não quebra se o GiveWP já foi removido;
 * Limpeza de padrão de código e remoção dos acessos obsoletos apontados pelo Plugin Check;
+* Versão mínima de PHP elevada para 8.1, alinhada no cabeçalho do plugin, no readme e nos workflows de release;
 * readme reescrito, com serviços externos, bibliotecas e configuração documentados.
 
 # 4.0.3 - 12/03/2026
