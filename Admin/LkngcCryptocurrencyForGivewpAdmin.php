@@ -29,25 +29,15 @@ final class LkngcCryptocurrencyForGivewpAdmin {
     private $version;
 
     /**
-     * The loader that's responsible for maintaining and registering all hooks that power
-     * the plugin.
-     *
-     * @since    3.0.0
-     * @access   protected
-     * @var      \Lkngc\CryptocurrencyForGivewp\Includes\LkngcCryptocurrencyForGivewpLoader    $loader
-     */
-    protected $loader;
-
-    /**
      * Initialize the class and set its properties.
      *
      * @since    1.0.0
-     * @param    string    $plugin_name
-     * @param    string    $version
+     * @param    string    $plugin_name    The ID of this plugin.
+     * @param    string    $version        The current version of this plugin.
      */
-    public function __construct($plugin_name, $loader) {
+    public function __construct($plugin_name, $version) {
         $this->plugin_name = $plugin_name;
-        $this->loader = $loader;
+        $this->version = $version;
     }
 
     /**
@@ -158,28 +148,41 @@ final class LkngcCryptocurrencyForGivewpAdmin {
      * @return   void
      */
     public function lkngc_cryptocurrency_for_givewp_donation_details(int $payment_id): void {
-        $metadata = json_decode(give_get_meta($payment_id, "lkngc_cryptocurrency_for_givewp_response", true));
+        $metadata = json_decode(give_get_meta($payment_id, 'lkngc_cryptocurrency_for_givewp_response', true));
 
-        if (isset($metadata)) {
-            load_template(
-                LKNGC_GIVE_CRYPTOCURRENCY_FOR_GIVEWP_DIR . 'Admin/partials/DonationDetailsTemplate.php',
-                true,
-                array(
-                    'box_title' => __('Donation Details', 'lkngc-cryptocurrency-for-givewp'),
-                    'return_msg_label' => __('Return Message:', 'lkngc-cryptocurrency-for-givewp'),
-                    'return_msg' => $metadata->status,
-                    'return_id_label' => __('Return identifier:', 'lkngc-cryptocurrency-for-givewp'),
-                    'return_id' => $metadata->transactionId,
-                    'crypto_value_label' => __('Criptocurrency value:', 'lkngc-cryptocurrency-for-givewp'),
-                    'crypto_value' => $metadata->totalCrypto,
-                    'wallet_label' => __('Wallet:', 'lkngc-cryptocurrency-for-givewp'),
-                    'wallet' => $metadata->wallet,
-                    'button_label' => __('Consult Transaction', 'lkngc-cryptocurrency-for-givewp'),
-                    'cripto_label' => __('Criptocurrency:', 'lkngc-cryptocurrency-for-givewp'),
-                    'crypto_type' => $metadata->crypto,
-                )
-            );
+        if ( ! is_object($metadata)) {
+            return;
         }
+
+        $lkngc_template = LKNGC_GIVE_CRYPTOCURRENCY_FOR_GIVEWP_DIR . 'Admin/partials/DonationDetailsTemplate.php';
+
+        if ( ! file_exists($lkngc_template)) {
+            return;
+        }
+
+        /*
+         * O `load_template()` do core não extrai o terceiro argumento no escopo
+         * do template (ele só repassa em `wp_before/after_load_template`), então
+         * o partial recebe `$args` por um include direto neste escopo.
+         */
+        $args = array(
+            'box_title' => __('Donation Details', 'lkngc-cryptocurrency-for-givewp'),
+            'return_msg_label' => __('Return Message:', 'lkngc-cryptocurrency-for-givewp'),
+            'return_msg' => isset($metadata->status) ? $metadata->status : '',
+            'return_id_label' => __('Return identifier:', 'lkngc-cryptocurrency-for-givewp'),
+            'return_id' => isset($metadata->transactionId) ? $metadata->transactionId : '',
+            'crypto_value_label' => __('Criptocurrency value:', 'lkngc-cryptocurrency-for-givewp'),
+            'crypto_value' => isset($metadata->totalCrypto) ? $metadata->totalCrypto : '',
+            'wallet_label' => __('Wallet:', 'lkngc-cryptocurrency-for-givewp'),
+            'wallet' => isset($metadata->wallet) ? $metadata->wallet : '',
+            'button_label' => __('Consult Transaction', 'lkngc-cryptocurrency-for-givewp'),
+            'cripto_label' => __('Criptocurrency:', 'lkngc-cryptocurrency-for-givewp'),
+            'crypto_type' => isset($metadata->crypto) ? $metadata->crypto : '',
+        );
+
+        require $lkngc_template;
+
+        unset($args);
     }
 
     /**

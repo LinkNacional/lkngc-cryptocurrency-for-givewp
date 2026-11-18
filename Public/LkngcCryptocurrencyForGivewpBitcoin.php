@@ -52,10 +52,13 @@ final class LkngcCryptocurrencyForGivewpBitcoin extends PaymentGateway {
      */
     public function getLegacyFormFieldMarkup(int $formId, array $args): string {
         $formTb = new Give_DB_Form_Meta();
-        $formTb->table_name = "wp_give_formmeta";
+        // phpcs:ignore WordPress.DB.SlowDBQuery.slow_db_query_meta_key -- consulta única da meta do formulário atual.
         $resultForm = $formTb->get_results_by(array('form_id' => $formId, 'meta_key' => '_give_form_template'));
 
-        if ('legacy' != $resultForm[0]->meta_value) {
+        // Formulários sem a meta registrada usam o template clássico (legacy).
+        $formTemplate = ! empty($resultForm) && isset($resultForm[0]->meta_value) ? $resultForm[0]->meta_value : 'legacy';
+
+        if ('legacy' != $formTemplate) {
             $html = '
             <div class="donation-errors">
                 <div class="give-notice give-notice-error" id="give_error_warning">
@@ -144,6 +147,7 @@ final class LkngcCryptocurrencyForGivewpBitcoin extends PaymentGateway {
                 LkngcCryptocurrencyForGivewpHelper::log($donation->id, array(
                     'donation' => $donation->toArray(),
                     'gateway_data' => $gatewayData,
+                    // phpcs:ignore WordPress.PHP.DevelopmentFunctions.error_log_var_export -- payload de log de debug.
                     'errors' => var_export($errors, true)
                 ));
             }
@@ -154,6 +158,7 @@ final class LkngcCryptocurrencyForGivewpBitcoin extends PaymentGateway {
 
             // Consultar API Externa
             $cabecalho = array('Content-Type: application/json');
+            // A cadeia consultada depende da moeda do gateway (btc/eth).
             $query = 'https://api.blockcypher.com/v1/btc/main/addrs/' . $wallet . '/full?limit=5';
             $response = $this->lkngc_cryptocurrency_for_givewp_connect_query($cabecalho, $query);
 
@@ -220,17 +225,14 @@ final class LkngcCryptocurrencyForGivewpBitcoin extends PaymentGateway {
     }
 
     public function lkngc_cryptocurrency_for_givewp_connect_query($headers, $query) {
-        $configs = LkngcCryptocurrencyForGivewpHelper::get_configs();
-        $url = $configs['urlQuery'] . $query;
-
-        // Configura os argumentos para a requisição HTTP
+        // `$query` já é a URL completa da BlockCypher montada pelo chamador.
         $args = array(
             'headers' => $headers,
             'timeout' => 45, // Tempo limite para a requisição em segundos
         );
 
         // Faz a requisição HTTP usando wp_remote_get
-        $response = wp_remote_get($url, $args);
+        $response = wp_remote_get($query, $args);
 
         if (is_wp_error($response)) {
             // Log de erro, se necessário
@@ -271,7 +273,8 @@ final class LkngcCryptocurrencyForGivewpBitcoin extends PaymentGateway {
     public function enqueueScript(int $formId): void {
         $configs = LkngcCryptocurrencyForGivewpHelper::get_configs();
         $wallets = LkngcCryptocurrencyForGivewpHelper::get_wallets();
-        $advDebug = $configs['advdebug'];
+        // A chave do config é `debug_advanced` (`advdebug` nunca existiu).
+        $advDebug = $configs['debug_advanced'];
 
         wp_enqueue_script(
             'lkngc-bitcoin-script-js',
