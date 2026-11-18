@@ -1,3 +1,16 @@
+# 4.0.4 - 18/11/2026
+* Corrigido o gateway Ethereum, que consultava a cadeia do Bitcoin (doações em ETH nunca eram confirmadas automaticamente);
+* Corrigida a verificação da constante de versão, que servia todos os assets com a versão fixa 1.0.0 (cache quebrado após atualização);
+* Corrigida a versão passada ao construtor da classe de admin;
+* Corrigido o bloco de detalhes da doação, que renderizava vazio (o load_template não expõe o terceiro argumento ao template);
+* Corrigida a consulta do template do formulário, que tinha o prefixo de tabela do WordPress fixo em "wp_";
+* Corrigida a rota REST de verificação, que matava a resposta JSON (exit) em requisições sem parâmetros e quebrava com doação inexistente ou API fora do ar;
+* A desinstalação agora remove apenas as opções do plugin e não quebra se o GiveWP já foi removido;
+* Limpeza de padrão de código e remoção dos acessos obsoletos apontados pelo Plugin Check;
+* Versão mínima de PHP elevada para 8.1, alinhada no cabeçalho do plugin, no readme e nos workflows de release;
+* readme reescrito, com serviços externos, bibliotecas e configuração documentados;
+* Removido o boilerplate npm/eslint que sobrou do template (o plugin não tem build de JavaScript e nunca usou esses pacotes), então o pacote não leva mais package.json e as dependências desatualizadas apontadas pelo Dependabot deixam de existir.
+
 # 4.0.3 - 12/03/2026
 * Adição de novos ícones e banners.
 

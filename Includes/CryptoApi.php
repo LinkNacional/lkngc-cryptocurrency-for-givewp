@@ -59,7 +59,7 @@ final class CryptoApi {
 
         $request = CryptoApi::blockcypher_wallet_query($wallet, $cryptoType, 5);
 
-        $transactionsQntd = $request['n_tx'];
+        $transactionsQntd = (isset($request['n_tx']) && isset($request['txs'])) ? (int) $request['n_tx'] : 0;
 
         // Limit because the request is definided to search the last five transactions.
         $transactionsAmount = ($transactionsQntd >= 5) ? 5 : $transactionsQntd;
@@ -100,12 +100,12 @@ final class CryptoApi {
                     $totTransMarginBottom = number_format($totTransMarginBottom, 0, '', '');
                 }
 
-                $arrOutputs = $request['txs'][$c]['outputs'];
+                $arrOutputs = isset($request['txs'][$c]['outputs']) ? $request['txs'][$c]['outputs'] : array();
 
                 // Filter the transaction wallets.
                 for ($i = 0; $i < count($arrOutputs); ++$i) {
                     // Catch the destinatary wallet.
-                    $txsWallet = $arrOutputs[$i]['addresses'][0];
+                    $txsWallet = isset($arrOutputs[$i]['addresses'][0]) ? $arrOutputs[$i]['addresses'][0] : '';
 
                     // Compare the wallets, if equal, verify the values.
                     if ($wallet === $txsWallet) {
@@ -114,10 +114,14 @@ final class CryptoApi {
                             // Register log with informations.
                             if ('enabled' === $logEnabled) {
                                 LkngcCryptocurrencyForGivewpHelper::log($donationId, array(
+                                    // phpcs:ignore WordPress.PHP.DevelopmentFunctions.error_log_var_export -- payload de log de debug.
                                     '[Total plugin Crypto]' => var_export($totalCrypto, true),
+                                    // phpcs:ignore WordPress.PHP.DevelopmentFunctions.error_log_var_export -- payload de log de debug.
                                     '[Total transaction Crypto]' => var_export($totalTransaction, true),
                                     '[Total transaction Error Margin]' => array('Min' => $totTransMarginBottom, 'Max' => $totTransMarginTop),
+                                    // phpcs:ignore WordPress.PHP.DevelopmentFunctions.error_log_var_export -- payload de log de debug.
                                     '[Carteira Crypto]' => var_export($wallet, true),
+                                    // phpcs:ignore WordPress.PHP.DevelopmentFunctions.error_log_var_export -- payload de log de debug.
                                     '[Carteira Crypto txs]' => var_export($txsWallet, true)
                                 ));
                             }
@@ -137,7 +141,9 @@ final class CryptoApi {
             // Register log with informations.
             if ('enabled' === $logEnabled) {
                 LkngcCryptocurrencyForGivewpHelper::log($donationId, array(
+                    // phpcs:ignore WordPress.PHP.DevelopmentFunctions.error_log_var_export -- payload de log de debug.
                     '[Total plugin Crypto]' => var_export($totalCrypto, true),
+                    // phpcs:ignore WordPress.PHP.DevelopmentFunctions.error_log_var_export -- payload de log de debug.
                     '[Carteira Crypto]' => var_export($wallet, true)
                 ));
             }
@@ -156,6 +162,9 @@ final class CryptoApi {
      * @return array    json with data for .js POST request.
      */
     public static function btn_transaction_verification(WP_REST_Request $request) {
+        $logEnabled = 'disabled';
+        $donationId = 0;
+
         try {
             $configs = LkngcCryptocurrencyForGivewpHelper::get_configs();
             $logEnabled = $configs['debug'];
@@ -164,15 +173,15 @@ final class CryptoApi {
 
             $verify_token = wp_hash(gmdate('dmYH') . 'notification');
 
-            $auth_token = sanitize_text_field($params['token']);
+            $auth_token = isset($params['token']) ? sanitize_text_field($params['token']) : '';
 
-            $donationId = sanitize_text_field($params['donation_id']);
-            $totalCryptoDec = sanitize_text_field($params['crypt_value']);
-            $wallet = sanitize_text_field($params['wallet_regist']);
-            $cryptoType = sanitize_text_field($params['crypto_type']);
+            $donationId = isset($params['donation_id']) ? sanitize_text_field($params['donation_id']) : '';
+            $totalCryptoDec = isset($params['crypt_value']) ? sanitize_text_field($params['crypt_value']) : '';
+            $wallet = isset($params['wallet_regist']) ? sanitize_text_field($params['wallet_regist']) : '';
+            $cryptoType = isset($params['crypto_type']) ? sanitize_text_field($params['crypto_type']) : '';
 
             if ($verify_token === $auth_token) {
-                if (isset($donationId) && isset($totalCryptoDec) && isset($wallet)) {
+                if ('' !== $donationId && '' !== $totalCryptoDec && '' !== $wallet) {
                     $meta = give_get_payment_meta($donationId, '_give_payment_gateway');
 
                     // Get the gateway identifier: ethereum or bitcoin.
@@ -188,7 +197,7 @@ final class CryptoApi {
 
                     $request = CryptoApi::blockcypher_wallet_query($wallet, $cryptoType, 50);
 
-                    $transactionsQntd = $request['n_tx'];
+                    $transactionsQntd = (isset($request['n_tx']) && isset($request['txs'])) ? (int) $request['n_tx'] : 0;
 
                     // Limit because the request is definided to search the last fifty transactions.
                     $transactionsAmount = ($transactionsQntd >= 50) ? 50 : $transactionsQntd;
@@ -234,12 +243,12 @@ final class CryptoApi {
                                 $totTransMarginBottom = number_format($totTransMarginBottom, 0, '', '');
                             }
 
-                            $arrOutputs = $request['txs'][$c]['outputs'];
+                            $arrOutputs = isset($request['txs'][$c]['outputs']) ? $request['txs'][$c]['outputs'] : array();
 
                             // Filter the transaction wallets.
                             for ($i = 0; $i < count($arrOutputs); ++$i) {
                                 // Catch the destinatary wallet.
-                                $txsWallet = $arrOutputs[$i]['addresses'][0];
+                                $txsWallet = isset($arrOutputs[$i]['addresses'][0]) ? $arrOutputs[$i]['addresses'][0] : '';
 
                                 // Compare the wallets, if equal, verify the values.
                                 if ($wallet === $txsWallet) {
@@ -258,9 +267,13 @@ final class CryptoApi {
 
                                         // Update metadata completed.
                                         $donation = Donation::find($donationId);
-                                        $donation->status = DonationStatus::COMPLETE();
-                                        $donation->save();
-                                        return array('return_response' => __('[Query result]: Payment confirmed', 'lkngc-cryptocurrency-for-givewp'));
+
+                                        if ($donation) {
+                                            $donation->status = DonationStatus::COMPLETE();
+                                            $donation->save();
+
+                                            return array('return_response' => __('[Query result]: Payment confirmed', 'lkngc-cryptocurrency-for-givewp'));
+                                        }
                                     }
                                 }
                             }
@@ -269,12 +282,16 @@ final class CryptoApi {
                         return array('return_response' => __('[Query result]: Unrecognized transaction on blockchain', 'lkngc-cryptocurrency-for-givewp'));
                     }
                 }
-                exit;
+
+                // Requisição sem os parâmetros obrigatórios: responde como não
+                // reconhecida (antes havia um `exit` que matava a resposta JSON).
+                return array('return_response' => __('[Query result]: Unrecognized transaction on blockchain', 'lkngc-cryptocurrency-for-givewp'));
             } else {
                 return array('return_response' => __('Unauthenticated session', 'lkngc-cryptocurrency-for-givewp'));
             }
         } catch (Throwable $e) {
             if ('enabled' === $logEnabled) {
+                // phpcs:ignore WordPress.PHP.DevelopmentFunctions.error_log_var_export -- payload de log de debug.
                 LkngcCryptocurrencyForGivewpHelper::log($donationId, array('donationID' => $donationId, 'error' => var_export($e, true)));
             }
             return $e;

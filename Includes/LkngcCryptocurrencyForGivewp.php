@@ -73,7 +73,7 @@ final class LkngcCryptocurrencyForGivewp {
      * @since    1.0.0
      */
     public function __construct() {
-        if (defined('LKNGC_GIVE_CRYPTO_CURRENCY_VERSION')) {
+        if (defined('LKNGC_GIVE_CRYPTOCURRENCY_FOR_GIVEWP_VERSION')) {
             $this->version = LKNGC_GIVE_CRYPTOCURRENCY_FOR_GIVEWP_VERSION;
         } else {
             $this->version = '1.0.0';

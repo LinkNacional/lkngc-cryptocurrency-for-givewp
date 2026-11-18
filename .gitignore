@@ -6,3 +6,6 @@ node_modules
 
 /vendor/
 logs.json
+/.phpunit.cache/
+.phpunit.result.cache
+composer.phar
